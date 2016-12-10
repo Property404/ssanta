@@ -14,6 +14,10 @@ def load_contacts(filename):
 	#Make contact list
 	raw = open(filename,"r").read();
 	raw = raw.replace("\r","");
+	if raw[-1]=="\n": raw=raw[0:-1]
+	while("\n\n" in raw):
+		raw = raw.replace("\n\n","\n")
+	if raw[-1]=="\n": raw=raw[0:-1]
 	raw_list = raw.split("\n");
 	contact_list=[];
 	
@@ -39,3 +43,5 @@ def show_contacts(contacts):
 		display+=("Secret Santa: "+i.name+"("+i.email+")\n");
 		display+=("Kid: "+i.kid.name+"\n\n");
 	return display
+if __name__=="__main__":
+        print(show_contacts(load_contacts("contacts.txt")))
